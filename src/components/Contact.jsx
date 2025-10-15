@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Instagram, Mail, Send, Sparkles, MapPin, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -21,53 +22,49 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
+  e.preventDefault();
+  setIsSubmitting(true);
+  setSubmitMessage('');
 
-    // Validación del frontend
-    if (!formData.nombre || !formData.email || !formData.mensaje) {
-      setSubmitMessage('❌ Por favor completá todos los campos');
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitMessage(''), 3000);
-      return;
-    }
+  // Validación
+  if (!formData.nombre || !formData.email || !formData.mensaje) {
+    setSubmitMessage('❌ Por favor completá todos los campos');
+    setIsSubmitting(false);
+    setTimeout(() => setSubmitMessage(''), 3000);
+    return;
+  }
+  
+  try {
+    // Enviar con EmailJS
+    await emailjs.send(
+      'service_xxxxxx',  // ← TU SERVICE ID
+      'template_xxxxxx', // ← TU TEMPLATE ID
+      {
+        nombre: formData.nombre,
+        email: formData.email,
+        servicio: formData.servicio,
+        mensaje: formData.mensaje
+      },
+      'xxxxxxxxxxxxxx' // ← TU PUBLIC KEY
+    );
+
+    setSubmitMessage('✅ ¡Mensaje enviado! Te contactaremos pronto 🎵');
+    setFormData({
+      nombre: '',
+      email: '',
+      servicio: 'Producción Musical',
+      mensaje: ''
+    });
     
-    try {
-      // URL del backend - CAMBIAR por tu URL de Railway
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      
-      const response = await fetch(`${API_URL}/api/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setSubmitMessage('✅ ¡Mensaje enviado! Te contactaremos pronto 🎵');
-        setFormData({
-          nombre: '',
-          email: '',
-          servicio: 'Producción Musical',
-          mensaje: ''
-        });
-      } else {
-        setSubmitMessage('❌ ' + data.message);
-      }
-      
-      setTimeout(() => setSubmitMessage(''), 5000);
-    } catch (error) {
-      console.error('Error:', error);
-      setSubmitMessage('❌ Error al enviar. Intentá por WhatsApp: +54 9 353 429-7565');
-      setTimeout(() => setSubmitMessage(''), 5000);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    setTimeout(() => setSubmitMessage(''), 5000);
+  } catch (error) {
+    console.error('Error:', error);
+    setSubmitMessage('❌ Error al enviar. Intentá por WhatsApp: +54 9 353 429-7565');
+    setTimeout(() => setSubmitMessage(''), 5000);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <section id="contacto" className="relative py-40 overflow-hidden">
