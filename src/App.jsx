@@ -7,7 +7,7 @@ import AudioComparison from './components/AudioComparison';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import WhatsAppWidget from './components/WhatsappWidget';
+import WhatsAppWidget from './components/WhatsAppWidget';
 
 function App() {
   return (
