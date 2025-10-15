@@ -139,9 +139,9 @@ const Services = () => {
 
                   {/* CTA */}
                   <button className="group/btn relative overflow-hidden glass px-6 py-3 rounded-full flex items-center gap-2 hover:bg-white/10 transition-all duration-300 border border-gray-700 hover:border-yellow-400">
-                    <span className="text-sm font-semibold">Más información</span>
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
+  <span className="text-sm font-semibold">Más información</span>
+  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+</button>
                 </div>
 
                 {/* Gradient overlay */}
