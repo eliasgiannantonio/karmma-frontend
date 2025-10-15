@@ -37,15 +37,15 @@ const Contact = () => {
   try {
     // Enviar con EmailJS
     await emailjs.send(
-      'service_xxxxxx',  // ← TU SERVICE ID
-      'template_xxxxxx', // ← TU TEMPLATE ID
+      'service_wcwctrt',  // ← TU SERVICE ID
+      'template_qhc152k', // ← TU TEMPLATE ID
       {
         nombre: formData.nombre,
         email: formData.email,
         servicio: formData.servicio,
         mensaje: formData.mensaje
       },
-      'xxxxxxxxxxxxxx' // ← TU PUBLIC KEY
+      'jp3MG3-0t33S_bWc-' // ← TU PUBLIC KEY
     );
 
     setSubmitMessage('✅ ¡Mensaje enviado! Te contactaremos pronto 🎵');
