@@ -5,11 +5,20 @@ import { motion } from 'framer-motion';
 const Services = () => {
   const [activeService, setActiveService] = useState(0);
 
+  const scrollToContact = () => {
+    const element = document.getElementById('contacto');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      console.error('Elemento #contacto no encontrado');
+    }
+  };
+
   const services = [
     {
       icon: <Music className="w-12 h-12" />,
       title: "Producción Musical",
-      description: "Beats originales y producciones completas adaptadas a tu estilo. Creamos el sonido que imaginás.",
+      description: "Beats originales y producciones completas adaptadas a tu estilo único. Desde trap hasta pop, creamos el sonido que imaginás.",
       features: ["Beats personalizados", "Arreglos profesionales", "Instrumentales exclusivos"],
       gradient: "from-yellow-400 to-orange-500",
       image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=600&fit=crop"
@@ -33,7 +42,7 @@ const Services = () => {
     {
       icon: <Camera className="w-12 h-12" />,
       title: "Producción Vocal",
-      description: "Especialistas en hacer brillar tu voz. Autotune, armonías y efectos que marcan la diferencia.",
+      description: "Especialistas en hacer brillar tu voz con efectos y procesamiento de última generación.",
       features: ["Autotune profesional", "Armonías vocales", "Efectos creativos"],
       gradient: "from-purple-500 to-indigo-500",
       image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800&h=600&fit=crop"
@@ -41,7 +50,7 @@ const Services = () => {
   ];
 
   return (
-    <section id="servicios" className="relative pt-32 overflow-hidden">
+    <section id="servicios" className="relative py-40 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#202125] via-[#1a1b1f] to-[#202125]"></div>
       
@@ -138,10 +147,13 @@ const Services = () => {
                   </ul>
 
                   {/* CTA */}
-                  <button className="group/btn relative overflow-hidden glass px-6 py-3 rounded-full flex items-center gap-2 hover:bg-white/10 transition-all duration-300 border border-gray-700 hover:border-yellow-400">
-  <span className="text-sm font-semibold">Más información</span>
-  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-</button>
+                  <button 
+                    onClick={scrollToContact}
+                    className="group/btn relative overflow-hidden glass px-6 py-3 rounded-full flex items-center gap-2 hover:bg-white/10 transition-all duration-300 border border-gray-700 hover:border-yellow-400 cursor-pointer"
+                  >
+                    <span className="text-sm font-semibold">Más información</span>
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
                 </div>
 
                 {/* Gradient overlay */}
@@ -163,11 +175,8 @@ const Services = () => {
             ¿No estás seguro cuál servicio necesitás?
           </p>
           <button 
-            onClick={() => {
-              const element = document.getElementById('contacto');
-              if (element) element.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="group relative inline-block"
+            onClick={scrollToContact}
+            className="group relative inline-block cursor-pointer"
           >
             <div className="relative glass px-8 py-4 rounded-full border-2 border-gray-700 hover:border-yellow-400 transition-colors flex items-center gap-3">
               <span className="font-semibold">Hablemos de tu proyecto</span>
